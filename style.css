@@ -1,0 +1,206 @@
+<style>
+    /* --- 變數定義：藍灰黑冷色調 --- */
+    :root {
+      --bg-body: #f1f3f5;       /* 淺灰背景 */
+      --bg-card: #ffffff;       /* 卡片白 */
+      --primary: #2563eb;       /* 專業藍 (Royal Blue) */
+      --primary-hover: #1d4ed8; /* 深藍 */
+      --text-main: #111827;     /* 近黑 */
+      --text-sub: #4b5563;      /* 深灰 */
+      --border: #d1d5db;        /* 邊框灰 */
+      --input-bg: #f9fafb;      /* 輸入框淺灰底 */
+    }
+
+    /* --- 基礎設定 --- */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
+    }
+    body {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    /* --- 主卡片 --- */
+    .container {
+      width: 100%;
+      max-width: 460px;
+      background: var(--bg-card);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: fit-content;
+    }
+
+    /* --- 標題區 --- */
+    h2 {
+      text-align: center;
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--text-main);
+      letter-spacing: 1px;
+      border-bottom: 2px solid var(--bg-body);
+      padding-bottom: 15px;
+    }
+
+    /* --- 表單佈局 (Grid System) --- */
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* 用於併排的容器 */
+    .row-group {
+      display: flex;
+      gap: 12px;
+    }
+    .col {
+      flex: 1; /* 讓兩個欄位等寬 */
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* --- 輸入框樣式 --- */
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+    }
+    
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--input-bg);
+      color: var(--text-main);
+      box-sizing: border-box;
+      transition: all 0.2s;
+      text-align: right; /* 數字靠右 */
+    }
+    /* 品項靠左 */
+    #itemName { text-align: left; }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* 唯讀欄位 (台幣) */
+    input[readonly] {
+      background-color: #e5e7eb; /* 深一點的灰 */
+      color: #1f2937;
+      font-weight: bold;
+      cursor: not-allowed;
+    }
+
+    /* --- 按鈕區 --- */
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    button {
+      padding: 12px;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #addBtn {
+      background: var(--primary);
+      color: white;
+      flex: 2;
+    }
+    #addBtn:hover { background: var(--primary-hover); }
+
+    #copyBtn {
+      background: #374151; /* 深灰 */
+      color: white;
+      flex: 1;
+    }
+    #copyBtn:hover { background: #1f2937; }
+
+    #clearBtn {
+      background: transparent;
+      border: 1px solid #ef4444;
+      color: #ef4444;
+      flex: 0.5;
+    }
+    #clearBtn:hover { background: #fef2f2; }
+
+    /* --- 表格區 --- */
+    .table-container {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      background: #f3f4f6;
+      color: var(--text-sub);
+      font-weight: 600;
+      padding: 10px;
+      text-align: right;
+      border-bottom: 1px solid var(--border);
+    }
+    th:first-child { text-align: left; padding-left: 14px; }
+    
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #f3f4f6;
+      text-align: right;
+      color: var(--text-main);
+    }
+    td:first-child { text-align: left; padding-left: 14px; font-weight: 500; }
+
+    /* 刪除按鈕 */
+    .delBtn {
+      background: none;
+      color: #9ca3af;
+      padding: 4px;
+      font-size: 14px;
+      margin-left: auto;
+    }
+    .delBtn:hover { color: #ef4444; }
+
+    /* 合計列 */
+    tfoot td {
+      background: #f9fafb;
+      font-weight: bold;
+      color: var(--primary);
+      border-top: 2px solid var(--border);
+      font-size: 16px;
+    }
+
+    /* --- RWD 手機版微調 --- */
+    @media (max-width: 400px) {
+      .container { padding: 16px; }
+      .row-group { gap: 8px; }
+      input { font-size: 16px; }
+    }
+  </style>
