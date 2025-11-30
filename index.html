@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SURAKA 團購計算機</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2>團購計算機</h2>
+
+    <div class="form-grid">
+      <div class="col">
+        <label for="itemName">品項名稱</label>
+        <input type="text" id="itemName" placeholder="例如：吉伊卡哇" />
+      </div>
+
+      <div class="row-group">
+        <div class="col">
+          <label for="rate">匯率</label>
+          <input type="number" id="rate" step="0.001" value="0.25" inputmode="decimal" />
+        </div>
+        <div class="col">
+          <label for="yen">日幣 (JPY)</label>
+          <input type="number" id="yen" placeholder="¥" inputmode="decimal" />
+        </div>
+      </div>
+
+      <div class="row-group">
+        <div class="col">
+          <label for="qty">數量</label>
+          <input type="number" id="qty" value="1" min="1" inputmode="numeric" />
+        </div>
+        <div class="col">
+          <label for="twd">台幣單價</label>
+          <input type="text" id="twd" readonly placeholder="自動計算" tabindex="-1" />
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button id="addBtn">加入清單</button>
+      <button id="copyBtn">複製</button>
+      <button id="clearBtn" title="清空">🗑️</button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th width="35%">品項</th>
+            <th width="20%">單價</th>
+            <th width="15%">數量</th>
+            <th width="20%">小計</th>
+            <th width="10%"></th>
+          </tr>
+        </thead>
+        <tbody id="listBody"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" style="color:var(--text-sub); font-size:13px;">總金額</td>
+            <td id="total">$0</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
