@@ -129,9 +129,8 @@ copyBtn.addEventListener("click", () => {
     // 匯率固定顯示小數點後四位
     const formattedRate = item.rate.toFixed(4);
     
-    text += `${item.name} (x${item.qty})\n`;
-    text += `  單價計算: ¥${formatNum(item.yen)} × ${formattedRate} ≈ $${formatNum(item.price)}/件\n`;
-    text += `  小計: $${formatNum(item.subtotal)}\n`;
+    text += `[${item.name}] ¥${formatNum(item.yen)} × ${formattedRate} ≈ $${formatNum(item.price)}\n`;
+    text += `(數量x${item.qty}) 小計: $${formatNum(item.subtotal)}\n`;
   });
 
   text += `------------------\n💰 最終總計：${totalCell.textContent}`;
