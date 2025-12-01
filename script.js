@@ -119,7 +119,7 @@ copyBtn.addEventListener("click", () => {
   if (cartItems.length === 0) return alert("清單是空的");
   
   // 組合文字清單 - 採用新格式
-  let text = "📋 喊單內容：\n------------------\n"; // 標題修正
+  let text = "📋 喊單內容：\n-----------------------------------\n"; // 標題修正
   
   cartItems.forEach((item, index) => {
     // 匯率固定顯示小數點後兩位 (您的要求)
@@ -135,7 +135,7 @@ copyBtn.addEventListener("click", () => {
     text += `(x${item.qty}) 小計：$${formatNum(item.subtotal)}\n`;
   });
 
-  text += `------------------\n💰 總計：${totalCell.textContent}`; // 總計修正
+  text += `-----------------------------------\n💰 總計：${totalCell.textContent}`; // 總計修正
 
   // 使用 Clipboard API 進行複製
   navigator.clipboard.writeText(text).then(() => {
