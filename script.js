@@ -118,7 +118,7 @@ copyBtn.addEventListener("click", () => {
   if (cartItems.length === 0) return alert("清單是空的");
   
   // 組合文字清單 - 採用新格式
-  let text = "📋 團購詳細清單\n------------------\n";
+  let text = "📋 喊單內容\n------------------\n";
   
   cartItems.forEach(item => {
     // 輸出格式:
@@ -126,14 +126,14 @@ copyBtn.addEventListener("click", () => {
     //   單價計算: ¥[日幣] × [匯率] ≈ $[台幣單價]
     //   小計: $[小計台幣]
     
-    // 匯率固定顯示小數點後四位
-    const formattedRate = item.rate.toFixed(4);
+    // 匯率固定顯示小數點後2位
+    const formattedRate = item.rate.toFixed(2);
     
     text += `[${item.name}] ¥${formatNum(item.yen)} × ${formattedRate} ≈ $${formatNum(item.price)}\n`;
     text += `(數量x${item.qty}) 小計: $${formatNum(item.subtotal)}\n`;
   });
 
-  text += `------------------\n💰 最終總計：${totalCell.textContent}`;
+  text += `------------------\n💰 總計：${totalCell.textContent}`;
 
   // 使用 Clipboard API 進行複製
   navigator.clipboard.writeText(text).then(() => {
