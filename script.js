@@ -13,10 +13,14 @@ let cartItems = [];
 const formatNum = (num) => num.toLocaleString('zh-TW');
 const numEmojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
 
-// 計算邏輯：
-// 進位至最接近的 0 或 5
+/**
+ * 指定計算邏輯：
+ * 進位至最接近的 0 或 5
+ */
 function computeAdjustedTWD(yen, rate) {
   const rawTwd = yen * rate;
+  if (rawTwd === 0) return 0;
+
   // 1. 先把小數點直接砍掉，只取整數 (例如 475.2 -> 475)
   let floorTwd = Math.floor(rawTwd);
   
@@ -120,7 +124,7 @@ clearBtn.addEventListener("click", () => {
 copyBtn.addEventListener("click", () => {
   if (cartItems.length === 0) return;
   
-  let text = "📋 喊單內容：\n-----------------------------------\n";
+  let text = "📋 喊單內容如下：\n-----------------------------------\n";
   cartItems.forEach((item, index) => {
     const formattedRate = item.rate.toFixed(3);
     const numberPrefix = numEmojis[index] ? numEmojis[index] : (index + 1) + '. ';
