@@ -19,11 +19,22 @@ const formatNum = (num) => num.toLocaleString('zh-TW');
 // 數字轉 Emoji 輔助陣列 (方便前十項使用)
 const numEmojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
 
-// 修改後的邏輯：無條件進位至最接近的 0 或 5
+// 進位至最接近的 0 或 5
 function computeAdjustedTWD(yen, rate) {
   const rawTwd = yen * rate;
-  // 使用 Math.ceil (無條件進位) 替代 Math.round
-  return Math.ceil(rawTwd / 5) * 5; 
+  // 1. 先把小數點直接砍掉，只取整數 (例如 475.2 -> 475)
+  let floorTwd = Math.floor(rawTwd);
+  
+  // 2. 判斷最後一碼
+  const lastDigit = floorTwd % 10;
+  
+  if (lastDigit === 0 || lastDigit === 5) {
+    return floorTwd; // 已經是 0 或 5，直接回傳
+  } else if (lastDigit < 5) {
+    return floorTwd + (5 - lastDigit); // 1~4 進到 5
+  } else {
+    return floorTwd + (10 - lastDigit); // 6~9 進到 10
+  }
 }
 
 // 更新台幣單價顯示
