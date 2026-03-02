@@ -120,7 +120,7 @@ clearBtn.addEventListener("click", () => {
 copyBtn.addEventListener("click", () => {
   if (cartItems.length === 0) return;
   
-  let text = "📋 喊單內容如下：\n-----------------------------------\n";
+  let text = "📋 喊單內容：\n-----------------------------------\n";
   cartItems.forEach((item, index) => {
     const formattedRate = item.rate.toFixed(3);
     const numberPrefix = numEmojis[index] ? numEmojis[index] : (index + 1) + '. ';
