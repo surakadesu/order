@@ -19,12 +19,11 @@ const formatNum = (num) => num.toLocaleString('zh-TW');
 // 數字轉 Emoji 輔助陣列 (方便前十項使用)
 const numEmojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
 
-// 計算邏輯：四捨五入至最接近的 0 或 5
+// 修改後的邏輯：無條件進位至最接近的 0 或 5
 function computeAdjustedTWD(yen, rate) {
   const rawTwd = yen * rate;
-  // 使用 Math.round 進行 5 單位進位
-  // 邏輯：(數字 / 5) 四捨五入後，再乘以 5
-  return Math.round(rawTwd / 5) * 5;
+  // 使用 Math.ceil (無條件進位) 替代 Math.round
+  return Math.ceil(rawTwd / 5) * 5; 
 }
 
 // 更新台幣單價顯示
