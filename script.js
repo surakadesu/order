@@ -13,10 +13,23 @@ let cartItems = [];
 const formatNum = (num) => num.toLocaleString('zh-TW');
 const numEmojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
 
-// 計算邏輯：四捨五入至最接近的 5 的倍數
+// 計算邏輯：
+// 進位至最接近的 0 或 5
 function computeAdjustedTWD(yen, rate) {
   const rawTwd = yen * rate;
-  return Math.round(rawTwd / 5) * 5;
+  // 1. 先把小數點直接砍掉，只取整數 (例如 475.2 -> 475)
+  let floorTwd = Math.floor(rawTwd);
+  
+  // 2. 判斷最後一碼
+  const lastDigit = floorTwd % 10;
+  
+  if (lastDigit === 0 || lastDigit === 5) {
+    return floorTwd; // 已經是 0 或 5，直接回傳
+  } else if (lastDigit < 5) {
+    return floorTwd + (5 - lastDigit); // 1~4 進到 5
+  } else {
+    return floorTwd + (10 - lastDigit); // 6~9 進到 10
+  }
 }
 
 // 更新預估單價顯示
